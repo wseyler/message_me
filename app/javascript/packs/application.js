@@ -7,7 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("jquery").start()
+require("jquery")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -19,10 +19,25 @@ require("jquery").start()
 
 // Loads all Semantic javascripts
 //= require semantic-ui
+scroll_bottom = function() {
+  if ($('#messages').length > 0) {
+    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+  }
+}
 
-$(document).on('turbolinks:load', function() {
-  $('.ui.dropdown').dropdown('show');
-  $('.message .close').on('click', function() {
-      $(this) .closest('.message').transition('fade');
+submit_message = function() {
+  $('#message_body').on('keydown', function(e) {
+    if (e.keyCode == 13) {
+      $('button').click();
+      e.target.value = "";
+    };
   });
-})
+};
+
+// $(document).on('turbolinks:load', function() {
+//   $('.ui.dropdown').dropdown('show');
+//   $('.message .close').on('click', function() {
+//       $(this) .closest('.message').transition('fade');
+//   });
+//  scroll_bottom();
+// })
